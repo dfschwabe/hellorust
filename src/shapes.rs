@@ -1,7 +1,8 @@
+#[cfg(test)]
 extern crate mockall;
 use std::collections::HashMap;
 
-#[mockall::automock]
+#[cfg_attr(test, mockall::automock)]
 pub trait Shape {
     fn spec(&self) -> HashMap<&'static str, u8>;
     fn area(&self) -> u16;
