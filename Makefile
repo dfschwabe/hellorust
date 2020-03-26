@@ -1,4 +1,4 @@
-CARGO_LOCATION=$(shell which cargo | grep .asdf || echo node-not-found)
+CARGO_LOCATION=$(shell which cargo | grep .asdf || echo cargo-not-found)
 
 .PHONY :test build 
 
