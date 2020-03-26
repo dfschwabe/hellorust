@@ -1,14 +1,16 @@
 mod shapes;
-
-fn print_area<T: shapes::HasArea>(shape: T) {
-    println!("This shape has an area of {}", shape.area());
-}
+mod formatter;
+extern crate rand;
 
 fn main() {
-    let s = shapes::Square {
-        x: 4,
-        y: 6,
+    let shape = shapes::Square {
+        x: rand::random::<u8>()%20,
+        y: rand::random::<u8>()%20,
     };
 
-   print_area(s); 
+    let formatter = formatter::Formatter{ shape, };
+
+    let format = formatter.format();
+
+    println!("{}", format);
 }

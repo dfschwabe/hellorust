@@ -5,6 +5,12 @@ description = """
 hello world!
 """
 
+[dependencies]
+rand = "0.7.3"
+
+[dev-dependencies]
+mockall = "0.6.0"
+
 [[bin]]
 name = "main"
 path = "src/main.rs"
