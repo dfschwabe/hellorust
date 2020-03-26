@@ -1,0 +1,17 @@
+[package]
+name = "hellorust"
+version = "0.0.0"
+description = """
+hello world!
+"""
+
+[[bin]]
+name = "main"
+path = "src/main.rs"
+
+[package.metadata.docs.rs]
+features = ["nightly"]
+
+[features]
+# Extra features for the nightly compiler only
+nightly = []
