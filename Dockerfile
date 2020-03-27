@@ -1,6 +1,6 @@
 FROM rust:1.40.0 AS build
 WORKDIR /usr/src
-ARG APP_NAME
+ARG APP_NAME=hellorust
 ARG APP_VSN
 
 # Download the target for static linking.
@@ -24,6 +24,6 @@ RUN cargo install --target x86_64-unknown-linux-musl --path .
 
 # Copy the statically-linked binary into a scratch container.
 FROM scratch
-COPY --from=build /usr/local/cargo/bin/${APP_NAME} .
+COPY --from=build /usr/local/cargo/bin/hellorust .
 USER 1000
-CMD ["./${APP_NAME}"]
+CMD ["./hellorust"]

@@ -1,0 +1,10 @@
+version: '2.1'
+
+services:
+  under_test:
+    image: hellorust 
+    container_name: test-hellorust
+    ports:
+    - 55555
+    
+
