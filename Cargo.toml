@@ -12,7 +12,7 @@ rand = "0.7.3"
 mockall = "0.6.0"
 
 [[bin]]
-name = "main"
+name = "hellorust"
 path = "src/main.rs"
 
 [package.metadata.docs.rs]
