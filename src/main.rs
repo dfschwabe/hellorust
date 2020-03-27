@@ -2,12 +2,20 @@ mod shapes;
 mod formatter;
 use std::net::{TcpListener};
 use std::io::Write;
+#[macro_use]
+extern crate log;
+extern crate simple_logger;
 extern crate rand;
 
 
 fn main() {
-    let listener = TcpListener::bind("127.0.0.1:55555").unwrap();
+    simple_logger::init().unwrap();
+    info!("starting server...");
+    let listener = TcpListener::bind("0.0.0.0:55555").unwrap();
+    info!("server started, waiting for connection...");
+
     let mut socket = listener.accept().unwrap();
+    info!("connection accepted!");
 
     let shape = shapes::Square {
         x: rand::random::<u8>()%20,
@@ -17,4 +25,6 @@ fn main() {
     let result = formatter.format();
 
     socket.0.write(result.as_bytes()).unwrap();
+
+    info!("fin.");
 }

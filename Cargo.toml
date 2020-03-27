@@ -7,6 +7,8 @@ hello world!
 
 [dependencies]
 rand = "0.7.3"
+log = "*"
+simple_logger = "*"
 
 [dev-dependencies]
 mockall = "0.6.0"
