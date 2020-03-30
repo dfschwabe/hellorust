@@ -1,10 +1,19 @@
 version: '2.1'
 
 services:
-  under_test:
+  hellorust:
     image: hellorust 
-    container_name: test-hellorust
+    container_name: hellorust
+    build:
+      context: ../
+      dockerfile: Dockerfile
     ports:
     - 55555
-    
+  it:
+    container_name: it
+    build:
+      context: .
+      dockerfile: Dockerfile.test
+    command: cargo test
+
 

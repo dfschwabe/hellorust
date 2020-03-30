@@ -12,10 +12,8 @@ RUN rustup target add x86_64-unknown-linux-musl
 RUN USER=root cargo new ${APP_NAME}
 WORKDIR /usr/src/${APP_NAME}
 COPY Cargo.toml Cargo.lock ./
-RUN \
-    sed -ie "s/version = \".*\"/version = \"${APP_VSN}\"/" ./Cargo.toml && \
-    rm ./Cargo.tomle && \
-    cargo build --release
+RUN if [ "$APP_VSN" ] ; then sed -ie "s/version = \".*\"/version = \"${APP_VSN}\"/" ./Cargo.toml; rm ./Cargo.tomle; fi
+RUN cargo build --release
 
 
 # Copy the source and build the application.
