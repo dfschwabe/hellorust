@@ -19,7 +19,7 @@ impl Shape for Square {
     }
 
     fn area(&self) -> u16 {
-        (self.x * self.y).into()
+        self.x as u16 * self.y as u16
     }
 }
 
@@ -45,7 +45,19 @@ mod tests {
     fn test_area() {
         let x : u8 = 7;
         let y : u8 = 3;
-        let expected : u16 = (x*y).into();
+        let expected : u16 = x as u16 * y as u16;
+
+        let under_test = Square{ x:x, y:y };
+        let actual = under_test.area();
+
+        assert_eq!(expected, actual);
+    }
+
+    #[test]
+    fn area_doesnt_overflow() {
+        let x : u8 = 255;
+        let y = x;
+        let expected : u16 = 255*255;
 
         let under_test = Square{ x:x, y:y };
         let actual = under_test.area();
