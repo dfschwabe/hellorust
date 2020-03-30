@@ -6,8 +6,9 @@ hello world!
 """
 
 [dependencies]
-rand = "0.7.3"
 log = "*"
+rand = "0.7.3"
+serde_json = "1.0"
 simple_logger = "*"
 
 [dev-dependencies]

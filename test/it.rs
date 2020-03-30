@@ -1,13 +1,23 @@
 #[cfg(test)]
 mod test {
+    use std::collections::HashMap;
     use std::net::{TcpStream};
-    use std::io::Read;
+    extern crate serde;
+    extern crate serde_json;
+
+    #[derive(serde::Deserialize, Debug)]
+    struct ShapeResult {
+        spec: HashMap<String, u8>,
+        area: u16,
+    }
 
     #[test]
-    fn writes_shape_on_connection() {
-        let mut stream = TcpStream::connect("hellorust:55555").unwrap();
-        let mut buffer = String::new();
-        stream.read_to_string(&mut buffer).unwrap();
-        assert!(buffer.starts_with("Shape"));
+    fn writes_square_on_connection() {
+        let stream = TcpStream::connect("hellorust:55555").unwrap();
+        let result: ShapeResult = serde_json::from_reader(stream).unwrap();
+        let expected: u16 = (result.spec["x"] * result.spec["y"]).into();
+        let actual = result.area;
+
+       assert_eq!(expected, actual);
     }
 }

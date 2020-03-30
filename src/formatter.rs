@@ -1,4 +1,5 @@
 use shapes;
+extern crate serde_json;
 
 pub struct Formatter<T> {
    pub shape: T,
@@ -6,7 +7,10 @@ pub struct Formatter<T> {
 
 impl<T: shapes::Shape> Formatter<T> {
     pub fn format(&self) -> String {
-        format!("Shape: {:?}\nArea: {}", self.shape.spec(), self.shape.area())
+        serde_json::json!({
+            "spec": self.shape.spec(),
+            "area": self.shape.area(),
+        }).to_string()
     }
 }
 
@@ -22,7 +26,10 @@ mod tests {
             [("a", 12),
             ("b", 23),
             ("c", 34)].iter().cloned().collect();
-        let expected = format!("Shape: {:?}\nArea: {}", expected_spec, expected_area);
+        let expected = serde_json::json!({
+            "spec": expected_spec,
+            "area": expected_area,
+        }).to_string();
         let mut mock_shape = shapes::MockShape::new();
         mock_shape.expect_spec().return_const(expected_spec);
         mock_shape.expect_area().return_const(expected_area);
