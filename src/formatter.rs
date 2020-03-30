@@ -20,12 +20,12 @@ mod tests {
     use std::collections::HashMap;
 
     #[test]
-    fn test_format() {
+    fn test_format<'a>() {
         let expected_area : u16 = 456;
-        let expected_spec : HashMap<&'static str, u8> = 
-            [("a", 12),
-            ("b", 23),
-            ("c", 34)].iter().cloned().collect();
+        let expected_spec : HashMap<String, u8> =
+            [("a".to_string(), 12),
+            ("b".to_string(), 23),
+            ("c".to_string(), 34)].iter().cloned().collect();
         let expected = serde_json::json!({
             "spec": expected_spec,
             "area": expected_area,
